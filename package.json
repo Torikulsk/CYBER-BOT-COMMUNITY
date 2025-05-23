@@ -30,6 +30,9 @@
   },
   "homepage": "https://github.com/ballpaka/BALL-PAKA-BOT",
   "dependencies": {
-    
+    "chalk": "^5.3.0",
+    "axios": "^1.6.7",
+    "moment": "^2.29.4",
+    "dotenv": "^16.4.5"
   }
 }
