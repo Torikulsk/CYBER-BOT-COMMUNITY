@@ -1,25 +1,18 @@
 const { spawn } = require("child_process");
-const axios = require("axios");
 const logger = require("./utils/log");
+const express = require("express");
+const path = require("path");
 
-///////////////////////////////////////////////////////////
-//========= Create website for dashboard/uptime =========//
-///////////////////////////////////////////////////////////
-
-const express = require('express');
-const path = require('path');
-
+//================== Website for Uptime ==================//
 const app = express();
 const port = process.env.PORT || 8080;
 
-// Serve the index.html file
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, '/index.html'));
 });
 
-// Start the server and add error handling
 app.listen(port, () => {
-    logger(`Server is running on port ${port}...`, "[ Starting ]");
+    logger(`Ball Paka Bot server running on port ${port}...`, "[ Server ]");
 }).on('error', (err) => {
     if (err.code === 'EACCES') {
         logger(`Permission denied. Cannot bind to port ${port}.`, "[ Error ]");
@@ -28,11 +21,7 @@ app.listen(port, () => {
     }
 });
 
-/////////////////////////////////////////////////////////
-//========= Create start bot and make it loop =========//
-/////////////////////////////////////////////////////////
-
-// Initialize global restart counter
+//================== Start & Restart Bot ==================//
 global.countRestart = global.countRestart || 0;
 
 function startBot(message) {
@@ -57,21 +46,7 @@ function startBot(message) {
     child.on("error", (error) => {
         logger(`An error occurred: ${JSON.stringify(error)}`, "[ Error ]");
     });
-};
+}
 
-////////////////////////////////////////////////
-//========= Check update from Github =========//
-////////////////////////////////////////////////
-
-axios.get("https://raw.githubusercontent.com/cyber-ullash/cyber-bot/main/data.json")
-    .then((res) => {
-        logger(res.data.name, "[ NAME ]");
-        logger(`Version: ${res.data.version}`, "[ VERSION ]");
-        logger(res.data.description, "[ DESCRIPTION ]");
-    })
-    .catch((err) => {
-        logger(`Failed to fetch update info: ${err.message}`, "[ Update Error ]");
-    });
-
-// Start the bot
-startBot();
+//================== Start Ball Paka Bot ==================//
+startBot("Ball Paka Bot is starting...");
