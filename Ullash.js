@@ -3,7 +3,6 @@ const logger = require("./utils/log");
 const express = require("express");
 const path = require("path");
 
-//================== Website for Uptime ==================//
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -21,7 +20,7 @@ app.listen(port, () => {
     }
 });
 
-//================== Start & Restart Bot ==================//
+
 global.countRestart = global.countRestart || 0;
 
 function startBot(message) {
@@ -48,5 +47,5 @@ function startBot(message) {
     });
 }
 
-//================== Start Ball Paka Bot ==================//
+
 startBot("Ball Paka Bot is starting...");
